@@ -8,19 +8,19 @@ window.onload = function(){
 }
 
 function setGame(){
-    // board = [
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0],
-    //     [0, 0, 0, 0]
-    // ]
-
     board = [
-        [2, 2, 2, 2],
-        [2, 2, 2, 2],
-        [4, 4, 8, 8],
-        [4, 4, 8, 8]
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
     ]
+
+    // board = [
+    //     [2, 2, 2, 2],
+    //     [2, 2, 2, 2],
+    //     [4, 4, 8, 8],
+    //     [4, 4, 8, 8]
+    // ]
     for(let r = 0;  r < rows; r++){
         for(let c = 0;  c < columns; c++){
             let tile = document.createElement("div");
@@ -30,8 +30,41 @@ function setGame(){
             document.getElementById("board").append(tile)
         }
     }
+    setTwo();
+    setTwo();
 
 }
+
+
+function hasEmptyTile(){
+    for (let r = 0; r < rows; r++){
+        for(let c = 0; c < columns; c++){
+            if (board[r][c] == 0){
+                return true;
+            }
+        }
+    }
+}
+
+function setTwo(){
+    if (!hasEmptyTile()){
+        return;
+    }
+    let found = false;
+    while(!found){
+        let r = Math.floor(Math.random() * rows);
+        let c = Math.floor(Math.random() * columns);
+        if (board[r][c] == 0){
+            board[r][c] == 2;
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
+            tile.innerText = "2";
+            tile.classList.add("x2");
+            found = true;
+
+        }
+    }
+}
+
 
 function updateTile(tile, num){
 tile.innerText = "";
@@ -53,17 +86,24 @@ if(num > 0){
 document.addEventListener("keyup", (e) =>{
     if(e.code == "ArrowLeft"){
         slideEffect();
+        // setTwo();
     }
     else if(e.code == "ArrowRight"){
         slideRight();
+        setTwo();
+
     }
     else if(e.code == "ArrowUp"){
         slideUp();
+        // setTwo();
+
     }
     else if(e.code == "ArrowDown"){
         slideDown();
-    }
+        // setTwo();
 
+    }
+    document.getElementById("score").innerText = score;
 })
 
 
