@@ -20,6 +20,7 @@ function setGame(){
             tile.id = r.toString() + "-" + c.toString();
             let num = board[r][c];
             updateTile(tile, num)
+            document.getElementById("board").append(tile)
         }
     }
 
@@ -30,6 +31,13 @@ tile.innerText = "";
 tile.classList.value = "";
 tile.classList.add("tile");
 if(num > 0){
+    tile.innerText = num;
+    if(num <= 4086) {
+        tile.classList.add("x"+num.toString());
+    }
+    else{
+        tile.classList.add("x8192");
 
+    }
 }
 }
