@@ -57,6 +57,9 @@ document.addEventListener("keyup", (e) =>{
     else if(e.code == "ArrowRight"){
         slideRight();
     }
+    else if(e.code == "ArrowUp"){
+        slideUp();
+    }
 
 })
 
@@ -108,6 +111,20 @@ function slideRight(){
             let tile = document.getElementById(r.toString() + "-" + c.toString());
             let num = board[r][c];
             updateTile(tile, num)
+        }
+    }
+}
+
+
+function slideUp(){
+    for(let c = 0; c < columns; c++){
+        let row = [board[0][c], board[1][c], board[2][c], board[3][c]];
+        row = slide(row)
+        for (let r = 0; r < rows; r++){
+            board[r][c] = row[r];
+            let tile = document.getElementById(r.toString() + "-" + c.toString());
+            let num = board[r][c];
+            updateTile(tile, num);
         }
     }
 }
